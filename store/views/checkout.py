@@ -97,21 +97,21 @@ def checkout(request):
             buyer_name = f'{user.first_name} {user.last_name}'
             print(buyer_name)
             # crating payment
-            response = API.payment_request_create(
-                amount=order.total,
-                purpose="Payment For Tshirts",
-                send_email=False,
-                buyer_name=f'{user.first_name} {user.last_name}',
-                email=user.email,
-                redirect_url="http://localhost:8000/validate_payment")
+            # response = API.payment_request_create(
+            #     amount=order.total,
+            #     purpose="Payment For Tshirts",
+            #     send_email=False,
+            #     buyer_name=f'{user.first_name} {user.last_name}',
+            #     email=user.email,
+            #     redirect_url="http://localhost:8000/validate_payment")
+            # print("---->>>>>>>", response)
+            # payment_request_id = response['payment_request']['id']
+            # url = response['payment_request']['longurl']
 
-            payment_request_id = response['payment_request']['id']
-            url = response['payment_request']['longurl']
-
-            payment = Payment()
-            payment.order = order
-            payment.payment_request_id = payment_request_id
-            payment.save()
-            return redirect(url)
+            # payment = Payment()
+            # payment.order = order
+            # payment.payment_request_id = payment_request_id
+            # payment.save()
+            return redirect('/')
         else:
             return redirect('/checkout/')

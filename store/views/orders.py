@@ -20,5 +20,8 @@ class OrderListView(ListView):
     context_object_name = 'orders'
 
     def get_queryset(self):
-        return  Order.objects.filter(user = self.request.user).order_by('-date').exclude(
-        order_status='PENDING')
+        return  Order.objects.all()     
+
+def orderList(request):
+    orders = Order.objects.filter(user=request.session['user'])
+    return render(request, "store/orders.html", {'data': orders})

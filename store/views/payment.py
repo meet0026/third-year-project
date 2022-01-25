@@ -15,7 +15,7 @@ from Tshop.settings import API_KEY, AUTH_TOKEN
 
 API = Instamojo(api_key=API_KEY,
                 auth_token=AUTH_TOKEN,
-                endpoint='https://test.instamojo.com/api/1.1/')
+                endpoint='https://www.instamojo.com/api/1.1/payment-requests/')
 
 
 
@@ -29,6 +29,7 @@ def validatePayment(request):
     print(payment_request_id, payment_id)
     response = API.payment_request_payment_status(payment_request_id,
                                                   payment_id)
+    print(response)                            
     status = response.get('payment_request').get('payment').get('status')
 
     if status != "Failed":
@@ -48,7 +49,7 @@ def validatePayment(request):
             request.session['cart'] = cart
             Cart.objects.filter(user=user).delete()
 
-            return redirect('orders')
+            return redirect('orders/')
         except:
             return render(request, 'store/payment_failed.html')
     else:
